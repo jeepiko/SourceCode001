@@ -1,0 +1,579 @@
+<div class="backcolor1 three">
+
+
+  <div class="row" style="background-color: #549FBC ; height: 30px;">
+    <p></p>
+  </div>
+  <div class="row" style="background-color: #DAF2FB; height: 25px;">
+    <div class="col-md-10" style="text-align:left">
+      <img style="margin-left: 10px;" src="./assets/img/logo.png" WIDTH="94" HEIGHT="45">
+
+      <a style="color: #549FBC ;  margin-left: 25px; "></a>
+    </div>
+
+    <div class="col-md-2" style="text-align:right">
+      <div class="dropdown" style="margin-right:20px;     font: 12px Arial, sans-serif;">
+        <button style="margin-right:20px; font: 12px Arial, sans-serif;" class="dropbtn">{{username}}&nbsp;&nbsp;
+          <i class="fa fa-chevron-down fa-1x   font: 14px Arial, sans-serif; font-weight: bold;"></i>
+        </button>
+        <div class="dropdown-content">
+          <a style="text-align:left" href="#" (click)="logout()">
+            <i class="fa fa-lock"></i>&nbsp;Logout</a>
+        </div>
+      </div>
+    </div>
+
+
+
+  </div>
+  <div class="row" style="background-color: #DCECF3; height: 20px;">
+  </div>
+
+
+  <div style="margin-left: 25px; margin-right: 25px; ">
+
+
+
+    <div class="configuration hidden-sm-down" [ngClass]="{'active': showSettings}">
+      <div class="configuration-cog" (click)="showSettings = !showSettings">
+
+        <i class="fa fa-gg" style="color : gray "></i>
+
+      </div>
+      <div class="card" style="font-size:12px;">
+        <div class="card-header cardbackcolor">
+          Dodatne opcije
+        </div>
+        <div class="card" style="font-size:12px;">
+          <div class="card-header " style="padding : 6px;">
+            <strong>Pretraživanje po nazivu</strong>
+          </div>
+          <div class="card-body  " style="padding :22px;">
+            <input type="text" [(ngModel)]="term" placeholder="Upišite  uvjet ..." [ngStyle]="{'height': '25px', 'font-size' :'12px','padding' : '4px'}">
+          </div>
+          <div class="card">
+
+          </div>
+
+        </div>
+
+      </div>
+    </div>
+    <a>&nbsp;</a> <a>&nbsp;</a>
+    <div style="color : #AADCEF ; background: #AADCEF;height: 8px;"> ... </div>
+    <a>&nbsp;</a>
+    <div class="row col-lg-12">
+      <div class="col-md-2"></div>
+      <div class="col-md-4">
+
+        <div class="card-body">
+
+          <div style="color:grey; font-size:24px">
+            <strong>{{username}}</strong>
+            <a>&nbsp;</a>
+            <span>
+              <a>&nbsp;</a><a> &nbsp;</a><a>&nbsp;</a><a>&nbsp;</a><a>&nbsp;</a><a>&nbsp;</a><a>&nbsp;</a><a>&nbsp;</a><a>&nbsp;</a><a>&nbsp;</a><a>&nbsp;</a><a> &nbsp;</a>
+              <a>&nbsp;</a><a>&nbsp;</a><a>&nbsp;</a><a>&nbsp;</a>
+            </span>
+          </div>
+          <div style="color:grey; font-size:18px"> {{useradrs}} </div>
+        </div>
+      </div>
+
+      <div class="col-md-3">
+        <div style="color:grey; font-size:24px">
+          <a>&nbsp;</a>
+        </div>
+        <div>
+          <a>&nbsp;</a>
+        </div>
+        <div style="color:grey; font-size:18px ; text-align:right">{{nazivstanje}}
+          <strong [style.color]="colorstanje"> {{podacistanje | number : '1.2-2' }}</strong> kn </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-10" style="left : 130px ">
+        <table class="table table-responsive table-hover table-outline mb-0">
+          <thead>
+            <tr>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let productwkorpregled of productswkorpregled | filter:term | paginate: { itemsPerPage: 18, currentPage: p }">
+              <td>
+                <div>
+                  <div class="small text-muted">Opis :</div>
+                  <span> {{productwkorpregled.Tekst}} </span>
+                </div>
+              </td>
+              <td>
+                <div>
+                  <div class="small text-muted">Datum dokumenta :</div>
+                  <span> {{productwkorpregled.DatumDokumenta}} </span>
+                </div>
+              </td>
+              <td>
+                <div>
+                  <div class="small text-muted">Datum dospijeća :</div>
+                  <span> {{productwkorpregled.DatumDospijeca}} </span>
+                </div>
+              </td>
+              <td>
+                <div>
+                  <div class="small text-muted">Dug :</div>
+                  <span> {{productwkorpregled.Duguje | number : '1.2-2'}} </span>
+                </div>
+              </td>
+              <td>
+                <div>
+                  <div class="small text-muted">Plaćeno :</div>
+                  <span> {{productwkorpregled.Potrazuje| number : '1.2-2'}} </span>
+                </div>
+              </td>
+              <td>{{productwkorpregled.Potrazuje}}</td> -->
+              <td style="text-align:center">
+                <a>
+                  <popover-content #myPopover title="" placement="auto bottom">
+                    <b> Print</b>
+                    <span style="color: #C21F39"> </span>
+                    <p>
+                      <span style="color: #00b3ee">Printanje računa - PDF format</span>
+                    </p>
+                    <b>
+                      <i>
+                        <span style="color: #ffc520"></span>
+                      </i>
+                    </b>
+                    <small> </small>
+                  </popover-content>
+                </a>
+                <button [popover]="myPopover" [popoverCloseOnMouseOutside]="false" [popoverOnHover]="true" *ngIf="productwkorpregled.Ispis=='RACN'"
+                  (click)="ispisiPregObrStan(productwkorpregled)" class="btn btn-info pointer blueborderbtn1">Ispis
+                </button>
+                <a>
+                  <popover-content #myPopovercode title="" placement="auto bottom">
+                    <b>2D bar code </b>
+                    <span style="color: #C21F39"> </span>
+                    <p>
+                      <span style="color: #00b3ee">Plaćanje računa - 2D bar code </span>
+                    </p>
+                    <b>
+                      <i>
+                        <span style="color: #ffc520"> </span>
+                      </i>
+                    </b>
+                    <small> </small>
+                  </popover-content>
+                </a>
+                <button [popover]="myPopovercode" [popoverCloseOnMouseOutside]="false" [popoverOnHover]="true" *ngIf="productwkorpregled.Ispis=='RACN'"
+                  (click)="ispisiPregObrBarCode(productwkorpregled)" class="btn btn-info pointer blueborderbtn1">Bar code
+                </button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+        <div id="myModal" style="text-align:center" *ngIf="productFormNaknStan">
+          <div class="modal-body">
+
+            <app-modal class="modal-overlay" [modalTitle]="'Unos novog podatka - unos'" [blocking]='false' [modalId]='modalId'>
+
+              <div class="card">
+                <div class="card-header cardbackcolor">
+                  <strong>DRUGI DOHODAK - STAVKE </strong> - Unos
+                </div>
+                <div class="card-body">
+                  <form [formGroup]="userForm" action="" method="post" class="form-horizontal">
+                    <div class="form-group row pror">
+                      <label class="col-md-4 form-control-label" for="hf-email">ID:</label>
+                      <div class="col-md-8">
+
+                        <input class="form-control" type="text" name="newProductNaknStan.Broj" placeholder="" [(ngModel)]="newProductNaknStan.Broj"
+                          [ngModelOptions]="{standalone: true}" disabled />
+
+                      </div>
+                    </div>
+
+                    <div class="form-group row pror">
+                      <label class="col-md-4 form-control-label" for="hf-email">ID Drugog Dohotka:</label>
+                      <div class="col-md-8">
+
+                        <input class="form-control" type="text" name="newProductNaknStan.DrugiDoh" [(ngModel)]="newProductNaknStan.DrugiDoh" [ngModelOptions]="{standalone: true}"
+                          disabled />
+
+                      </div>
+                    </div>
+
+                    <div class="form-group row pror">
+                      <label class="col-md-4 form-control-label" for="hf-email"> Predstavnik :</label>
+                      <div class="col-md-8">
+                        <input type="text" [(ngModel)]="selectedPosp.Broj" [ngModelOptions]="{standalone: true}" [typeahead]="productsposp" class="form-control"
+                          (typeaheadOnSelect)="typeaheadOnSelect1($event)" typeaheadOptionField="Naziv" placeholder="Odaberite predstavnika  ..."
+                          typeaheadOptionsLimit="7">
+                      </div>
+                    </div>
+
+
+                    <div class="form-group row pror">
+                      <label class="col-md-4 form-control-label" for="hf-email">Bruto:</label>
+                      <div class="col-md-8">
+
+                        <input class="form-control" type="text" name="newProductNaknStan.Bruto" [(ngModel)]="newProductNaknStan.Bruto" [ngModelOptions]="{standalone: true}"
+                          (change)="getBrutRacun(newProductNaknStan)" />
+                      </div>
+                    </div>
+
+                    <div class="form-group row pror">
+                      <label class="col-md-4 form-control-label" for="hf-email">Mio1:</label>
+                      <div class="col-md-8">
+
+                        <input class="form-control" type="text" name="newProductNaknStan.Mio1" [(ngModel)]="newProductNaknStan.Mio1" [ngModelOptions]="{standalone: true}"
+                        />
+
+                      </div>
+                    </div>
+
+                    <div class="form-group row pror">
+                      <label class="col-md-4 form-control-label" for="hf-email">Mio2:</label>
+                      <div class="col-md-8">
+
+                        <input class="form-control" type="text" name="newProductNaknStan.Mio2" [(ngModel)]="newProductNaknStan.Mio2" [ngModelOptions]="{standalone: true}"
+                        />
+
+                      </div>
+                    </div>
+
+                    <div class="form-group row pror">
+                      <label class="col-md-4 form-control-label" for="hf-email">Porez1:</label>
+                      <div class="col-md-8">
+                        <input class="form-control" type="text" name="newProductNaknStan.Porez1" [(ngModel)]="newProductNaknStan.Porez1" [ngModelOptions]="{standalone: true}"
+                        />
+
+                      </div>
+                    </div>
+
+                    <div class="form-group row pror">
+                      <label class="col-md-4 form-control-label" for="hf-email">Prirez:</label>
+                      <div class="col-md-8">
+                        <input class="form-control" type="text" name="newProductNaknStan.Prirez" [(ngModel)]="newProductNaknStan.Prirez" [ngModelOptions]="{standalone: true}"
+                        />
+
+                      </div>
+                    </div>
+
+                    <div class="form-group row pror">
+                      <label class="col-md-4 form-control-label" for="hf-email">Neto:</label>
+                      <div class="col-md-8">
+                        <input class="form-control" type="text" name="newProductNaknStan.Neto" [(ngModel)]="newProductNaknStan.Neto" [ngModelOptions]="{standalone: true}"
+                        />
+
+                      </div>
+                    </div>
+
+
+                    <div class="form-group row pror">
+                      <label class="col-md-4 form-control-label" for="hf-email">ZdrOsiguranje:</label>
+                      <div class="col-md-8">
+                        <input class="form-control" type="text" name="newProductNaknStan.ZdrOsiguranje" [(ngModel)]="newProductNaknStan.ZdrOsiguranje"
+                          [ngModelOptions]="{standalone: true}" />
+
+                      </div>
+                    </div>
+                  </form>
+                </div>
+                <div class="card-footer">
+                  <button (click)="saveProductNaknStan(newProductNaknStan)" type="submit" class="btn btn-sm btn-primary">
+                    <i class="fa fa-dot-circle-o"></i>Spremi</button>
+                  <button (click)="cancelNewProductNaknStan()" type="reset" class="btn btn-sm btn-danger">
+                    <i class="fa fa-ban"></i> Prekini</button>
+                </div>
+              </div>
+
+            </app-modal>
+          </div>
+        </div>
+
+        <div id="myModal" style="text-align:center" *ngIf="editProductFormNaknStan">
+          <div class="modal-body">
+            <app-modal class="modal-overlay" [modalTitle]="'Promjena podatka - promjena'" [blocking]='false' [modalId]='modalId'>
+             <div class="card">
+                <div class="card-header cardbackcolor">
+                  <strong>DRUGI DOHODAK - STAVKE </strong> - Promjena
+                </div>
+                <div class="card-body">
+                  <form [formGroup]="userForm1" action="" method="post" class="form-horizontal">
+                    <div class="form-group row pror">
+                      <label class="col-md-4 form-control-label" for="hf-email">ID:</label>
+                      <div class="col-md-8">
+                        <input class="form-control" type="text" name="editedProductNaknStan.Broj" placeholder="" [(ngModel)]="editedProductNaknStan.Broj"
+                          [ngModelOptions]="{standalone: true}" disabled />
+                      </div>
+                    </div>
+                    <div class="form-group row pror">
+                      <label class="col-md-4 form-control-label" for="hf-email">ID Drugog Dohotka:</label>
+                      <div class="col-md-8">
+                        <input class="form-control" type="text" name="editedProductNaknStan.DrugiDoh" [(ngModel)]="editedProductNaknStan.DrugiDoh"
+                          [ngModelOptions]="{standalone: true}" disabled />
+                      </div>
+                    </div>
+                    <div class="form-group row pror">
+                      <label class="col-md-4 form-control-label" for="hf-email"> Predstavnik :</label>
+                      <div class="col-md-8">
+                        <input [(ngModel)]="selectedPosp.Naziv" [ngModelOptions]="{standalone: true}" [typeahead]="productsposp" class="form-control"
+                          (typeaheadOnSelect)="typeaheadOnSelect1($event)" typeaheadOptionField="Naziv" placeholder="Odaberite predstavnika  ..."
+                          typeaheadOptionsLimit="7">
+                      </div>
+                    </div>
+                    <div class="form-group row pror">
+                      <label class="col-md-4 form-control-label" for="hf-email">Bruto:</label>
+                      <div class="col-md-8">
+
+                        <input class="form-control" type="text" name="editedProductNaknStan.Bruto" [(ngModel)]="editedProductNaknStan.Bruto" [ngModelOptions]="{standalone: true}"
+                          (change)="getBrutRacun(editedProductNaknStan)" />
+                      </div>
+                    </div>
+                    <div class="form-group row pror">
+                      <label class="col-md-4 form-control-label" for="hf-email">Mio1:</label>
+                      <div class="col-md-8">
+                        <input class="form-control" type="text" name="editedProductNaknStan.Mio1" [(ngModel)]="editedProductNaknStan.Mio1" [ngModelOptions]="{standalone: true}"
+                        />
+                      </div>
+                    </div>
+                    <div class="form-group row pror">
+                      <label class="col-md-4 form-control-label" for="hf-email">Mio2:</label>
+                      <div class="col-md-8">
+                        <input class="form-control" type="text" name="editedProductNaknStan.Mio2" [(ngModel)]="editedProductNaknStan.Mio2" [ngModelOptions]="{standalone: true}"
+                        />
+                      </div>
+                    </div>
+                    <div class="form-group row pror">
+                      <label class="col-md-4 form-control-label" for="hf-email">Porez1:</label>
+                      <div class="col-md-8">
+                        <input class="form-control" type="text" name="editedProductNaknStan.Porez1" [(ngModel)]="editedProductNaknStan.Porez1" [ngModelOptions]="{standalone: true}"
+                        />
+                      </div>
+                    </div>
+                    <div class="form-group row pror">
+                      <label class="col-md-4 form-control-label" for="hf-email">Prirez:</label>
+                      <div class="col-md-8">
+                        <input class="form-control" type="text" name="editedProductNaknStan.Prirez" [(ngModel)]="editedProductNaknStan.Prirez" [ngModelOptions]="{standalone: true}"
+                        />
+                      </div>
+                    </div>
+                    <div class="form-group row pror">
+                      <label class="col-md-4 form-control-label" for="hf-email">Neto:</label>
+                      <div class="col-md-8">
+                        <input class="form-control" type="text" name="editedProductNaknStan.Neto" [(ngModel)]="editedProductNaknStan.Neto" [ngModelOptions]="{standalone: true}"
+                        />
+                      </div>
+                    </div>
+                    <div class="form-group row pror">
+                      <label class="col-md-4 form-control-label" for="hf-email">ZdrOsiguranje:</label>
+                      <div class="col-md-8">
+                        <input class="form-control" type="text" name="editedProductNaknStan.ZdrOsiguranje" [(ngModel)]="editedProductNaknStan.ZdrOsiguranje"
+                          [ngModelOptions]="{standalone: true}" />
+                      </div>
+                    </div>
+                  </form>
+                </div>
+                <div class="card-footer">
+                  <button (click)="updateProductNaknStan(editedProductNaknStan)" type="submit" class="btn btn-sm btn-primary">
+                    <i class="fa fa-dot-circle-o"></i>Spremi</button>
+                  <button (click)="cancelEditsNaknStan()" type="reset" class="btn btn-sm btn-danger">
+                    <i class="fa fa-ban"></i> Prekini</button>
+                </div>
+              </div>
+            </app-modal>
+          </div>
+        </div>
+        <div id="myModal" style="text-align:center" *ngIf="editDeleteFormNaknStan">
+          <div class="modal-body">
+            <app-modal class="modal-overlay" [modalTitle]="'Brisanje podatka - brisanje '" [blocking]='false' [modalId]='modalId'>
+              <div class="card">
+                <div class="card-header cardbackcolor">
+                  <strong>DRUGI DOHODAK - STAVKE </strong> - Brisanje
+                </div>
+                <div class="card-body">
+
+
+                  <form action="" method="post" class="form-horizontal">
+                    <div class="form-group row pror">
+                      <label class="col-md-4 form-control-label" for="hf-email">ID:</label>
+                      <div class="col-md-8">
+                        <input class="form-control" type="text" name="Broj" placeholder="" [(ngModel)]="editedProductNaknStan.Broj" disabled />
+                      </div>
+                    </div>
+
+
+                    <div class="form-group row pror">
+                      <label class="col-md-4 form-control-label" for="hf-email">ID Drugog Dohotka:</label>
+                      <div class="col-md-8">
+
+                        <input class="form-control" type="text" name="editedProductNaknStan.DrugiDoh" [(ngModel)]="editedProductNaknStan.DrugiDoh"
+                          [ngModelOptions]="{standalone: true}" disabled />
+
+                      </div>
+                    </div>
+                    <div class="form-group row pror">
+                      <label class="col-md-4 form-control-label" for="hf-email">Predstavnik:</label>
+                      <div class="col-md-8">
+
+                        <input class="form-control" type="text" name="editedProductNaknStan..NazivPredstavnika" [(ngModel)]="editedProductNaknStan.NazivPredstavnika"
+                          [ngModelOptions]="{standalone: true}" disabled />
+
+                      </div>
+                    </div>
+
+
+
+                    <div class="form-group row pror">
+                      <label class="col-md-4 form-control-label" for="hf-email">Bruto:</label>
+                      <div class="col-md-8">
+
+                        <input class="form-control" type="text" name="editedProductNaknStan.Bruto" [(ngModel)]="editedProductNaknStan.Bruto" [ngModelOptions]="{standalone: true}"
+                        />
+
+                      </div>
+                    </div>
+
+                    <div class="form-group row pror">
+                      <label class="col-md-4 form-control-label" for="hf-email">Mio1:</label>
+                      <div class="col-md-8">
+
+                        <input class="form-control" type="text" name="editedProductNaknStan.Mio1" [(ngModel)]="editedProductNaknStan.Mio1" [ngModelOptions]="{standalone: true}"
+                        />
+
+                      </div>
+                    </div>
+
+                    <div class="form-group row pror">
+                      <label class="col-md-4 form-control-label" for="hf-email">Mio2:</label>
+                      <div class="col-md-8">
+
+                        <input class="form-control" type="text" name="editedProductNaknStan.Mio2" [(ngModel)]="editedProductNaknStan.Mio2" [ngModelOptions]="{standalone: true}"
+                        />
+
+                      </div>
+                    </div>
+
+                    <div class="form-group row pror">
+                      <label class="col-md-4 form-control-label" for="hf-email">Porez1:</label>
+                      <div class="col-md-8">
+
+                        <input class="form-control" type="text" name="editedProductNaknStan.Porez1" [(ngModel)]="editedProductNaknStan.Porez1" [ngModelOptions]="{standalone: true}"
+                        />
+
+                      </div>
+                    </div>
+
+                    <div class="form-group row pror">
+                      <label class="col-md-4 form-control-label" for="hf-email">Prirez:</label>
+                      <div class="col-md-8">
+
+                        <input class="form-control" type="text" name="editedProductNaknStan.Prirez" [(ngModel)]="editedProductNaknStan.Prirez" [ngModelOptions]="{standalone: true}"
+                        />
+
+                      </div>
+                    </div>
+
+                    <div class="form-group row pror">
+                      <label class="col-md-4 form-control-label" for="hf-email">Neto:</label>
+                      <div class="col-md-8">
+
+                        <input class="form-control" type="text" name="editedProductNaknStan.Neto" [(ngModel)]="editedProductNaknStan.Neto" [ngModelOptions]="{standalone: true}"
+                        />
+
+                      </div>
+                    </div>
+
+
+                    <div class="form-group row pror">
+                      <label class="col-md-4 form-control-label" for="hf-email">ZdrOsiguranje:</label>
+                      <div class="col-md-8">
+
+                        <input class="form-control" type="text" name="editedProductNaknStan.ZdrOsiguranje" [(ngModel)]="editedProductNaknStan.ZdrOsiguranje"
+                          [ngModelOptions]="{standalone: true}" />
+
+                      </div>
+                    </div>
+                  </form>
+                </div>
+                <div class="card-footer">
+                  <button (click)="deleteProductNaknStan(editedProductNaknStan)" type="submit" class="btn btn-sm btn-primary">
+                    <i class="fa fa-dot-circle-o"></i>Brisi</button>
+                  <button (click)="cancelEditsNaknStan()" type="reset" class="btn btn-sm btn-danger">
+                    <i class="fa fa-ban"></i> Prekini</button>
+                </div>
+              </div>
+
+
+
+
+            </app-modal>
+          </div>
+
+        </div>
+
+        <div id="myModal2" style="text-align:center " *ngIf="barcodeForm">
+          <div class="modal-body">
+            <app-modal class="modal-overlay" [modalTitle]="'Regitriraj se '" [blocking]='false' [modalId]='modalId'>
+              <div class="card">
+                <div class="card-header cardbackcolor" style="font-size: 14px">
+                  <strong>2D Barcode</strong> - plaćanje
+                </div>
+
+                <div class="card" style="width:100%">
+                  <div class="card-body text-center">
+
+                    <a style="color:#549FBC ;font-size: 16px ;font-weight: bold;">plaćanje mobilnim bankarstvom</a>
+
+                  </div>
+                </div>
+                <div class="card-body" style="font-size: 14px;background-color: #E5E6E6">
+                  <form action="" method="post" class="form-horizontal" style="text-align:left">
+                    <div class="form-group row pror">
+                      <label class="col-md-4 form-control-label" for="hf-email">Text :</label>
+                      <div class="col-md-8"> {{barcodetextslog.Tekst}} </div>
+                    </div>
+                    <div class="form-group row pror">
+                      <label class="col-md-4 form-control-label" for="hf-email">Dat. Dokumenta :</label>
+                      <div class="col-md-8"> {{barcodetextslog.DatumDokumenta}} </div>
+                    </div>
+                    <div class="form-group row pror">
+                      <label class="col-md-4 form-control-label" for="hf-email">Dat. Dospijeca :</label>
+                      <div class="col-md-8"> {{barcodetextslog.DatumDospijeca}} </div>
+                    </div>
+                    <div class="form-group row pror">
+                      <label class="col-md-4 form-control-label" for="hf-email">Za platiti :</label>
+                      <div class="col-md-8"> {{barcodetextslog.Duguje}} </div>
+                    </div>
+
+                    <p></p>
+                    <p></p>
+                    <div class="form-group row pror">
+                      <img src={{barcodeimg}} />
+                    </div>
+                    <p></p>
+                  </form>
+                </div>
+                <div class="card-footer" *ngIf="!izmjenaPotvrdi">
+                  <button (click)="cancelNewForm()" type="button" class="btn btn-sm btn-primary" style="background-color:#549FBC;color:#fff;">
+                    <i class="fa fa-dot-circle-o"></i> Izlaz</button>
+                </div>
+
+              </div>
+            </app-modal>
+          </div>
+        </div>
+
+        <footer>
+
+          <div class="partrrr">
+            <div class="loading" [hidden]="loaderInda"></div>
+          </div>
+
+          <div class="row">
+
+          </div>
+        </footer>
+      </div>
+    </div>

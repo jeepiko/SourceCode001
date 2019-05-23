@@ -1,0 +1,667 @@
+<div class="backcolor1 three">
+
+  <div class="row" style="background-color: #549FBC ; height: 30px;">
+
+    <p></p>
+  </div>
+  <div class="row" style="background-color: #DAF2FB; height: 25px;">
+    <div class="col-md-10" style="text-align:left">
+      <img style="margin-left: 10px;" src="./assets/img/logo.png" WIDTH="94" HEIGHT="45">
+
+      <a style="color: #549FBC ;  margin-left: 25px; "></a>
+    </div>
+
+    <div class="col-md-2" style="text-align:right">
+      <div class="dropdown" style="margin-right:20px;     font: 12px Arial, sans-serif;">
+        <button style="margin-right:20px; font: 12px Arial, sans-serif;" class="dropbtn">{{username}}&nbsp;&nbsp;
+          <i class="fa fa-chevron-down fa-1x   font: 14px Arial, sans-serif; font-weight: bold;"></i>
+        </button>
+        <div class="dropdown-content">
+          <!--<a style = "text-align:left" href="#" > <i class="fa fa-shield"></i>&nbsp;Lock account</a>-->
+          <a style="text-align:left" href="#" (click)="logout()">
+            <i class="fa fa-lock pointer"></i>&nbsp;Logout</a>
+          <a style="text-align:left" (click)="showIzmjenaForm()">
+            <i class="fa fa-lock pointer"></i>&nbsp;Izmjena lozinke</a>
+        </div>
+
+      </div>
+    </div>
+
+  </div>
+  <div class="row" style="background-color: #DCECF3; height: 20px;">
+  </div>
+
+  <a>&nbsp;</a>
+
+  <div class="backcolor1" style="margin-left: 25px; margin-right: 25px;">
+
+    <div class="configuration hidden-sm-down" [ngClass]="{'active': showSettings}">
+      <div class="configuration-cog" (click)="showSettings = !showSettings">
+
+        <i class="fa fa-gg" style="color : gray "></i>
+
+      </div>
+      <div class="card" style="font-size:12px;">
+        <div class="card-header cardbackcolor">
+          Dodatne opcije
+        </div>
+        <div class="card" style="font-size:12px;">
+          <div class="card-header " style="padding : 6px;">
+            <strong>Pretraživanje po nazivu</strong>
+          </div>
+          <div class="card-body  " style="padding :22px;">
+
+            <input type="text" [(ngModel)]="term" placeholder="Upišite  uvjet ..." [ngStyle]="{'height': '25px', 'font-size' :'12px','padding' : '4px'}">
+
+          </div>
+
+        </div>
+        <div class="card ">
+          <a>&nbsp;</a>
+          <a>&nbsp;</a>
+
+        </div>
+
+      </div>
+
+    </div>
+  </div>
+
+
+
+  <div class="row col-md-8 " style="text-align:center ">
+
+
+  </div>
+
+  <div style="text-align:right; margin-right: 50px;  color : gray ; ">{{naslov}} {{username}} </div>
+
+
+
+  <div class="row col-md-8 " style="text-align:center ">
+    <div class="col-md-2 " style="text-align:center ">
+    </div>
+  </div>
+
+  <div style="text-align:right ;color : gray ; background: #AADCEF;height: 8px;"> </div>
+  <a>&nbsp;</a>
+
+  <div class="row col-lg-12">
+    <div class="col-md-2"></div>
+    <div class="col-md-4">
+
+      <div class="card-body">
+
+        <div style="color:grey; font-size:24px">
+          <strong>{{username}}</strong>
+        </div>
+        <div style="color:grey; font-size:18px"> {{useradrs}} </div>
+      </div>
+    </div>
+    <div class="col-md-6 " style="text-align:center ">
+      <p>&nbsp; </p>
+      <div class="row  " style="text-align:center ">
+
+        <div *ngIf="prikazi_btnstan">
+          <button type="button" class="btn btn-info pointer blueborderbtn1" (click)="readMyAllWKorisnik('A')">Stanar </button>
+
+        </div>
+        <a>&nbsp;</a>
+
+        <div *ngIf="prikazi_btnpredstavnik">
+          <button type="button" class="btn btn-info pointer blueborderbtn1" (click)="readMyAllWPredstavnik('C')">Predstavnik </button>
+        </div>
+        <a>&nbsp;</a>
+        <div *ngIf="prikazi_btnmajstor">
+          <button type="button" class="btn btn-info pointer blueborderbtn1" (click)="readMyAllWMajstor('B')">Kooperant </button>
+
+        </div>
+      </div>
+    </div>
+
+
+  </div>
+
+  <p> </p>
+
+  <div class="row col-lg-12 ">
+
+
+    <div class="col-md-1">
+    </div>
+
+    <div class="col-md-10">
+      <div class="card">
+
+        <div class="card-body ">
+
+          <table class="table table-responsive table-hover table-outline mb-0">
+
+            <thead>
+
+              <tr>
+
+              </tr>
+            </thead>
+            <tbody>
+
+              <tr *ngFor="let productkorisnik of productsprikazi | filter:term " (click)="setClickedRow(productkorisnik)" [class.active]="productkorisnik.BrojStana == selectedRow">
+
+
+                <td class="text-center">
+                  <div class="fa fa-map-marker " style="color : #00b3ee; font-size:28px">
+
+                    <span class="small text-muted" style="font-size:20px"> {{productkorisnik.Naziv}}</span>
+
+                  </div>
+                </td>
+
+
+
+
+                <td *ngIf="productkorisnik.Povrsina != 'NE' ">
+                  <div>
+                    <div class="small text-muted">Površina :</div>
+                    <span> {{productkorisnik.Povrsina}} </span>
+                  </div>
+                </td>
+                <td *ngIf="productkorisnik.Povrsina != 'NE'" class="text-center">
+                  <div>
+                    <div class="small text-muted">Koeficijent :</div>
+
+                    <span> {{productkorisnik.Koeficijent}}</span> | {{productkorisnik.Cijena}} kn
+                  </div>
+                </td>
+
+                <td *ngIf="productkorisnik.Povrsina != 'NE'">
+                  <div [ngClass]="{'positive' : convertToNum(productkorisnik.Stanje) > 0,'negative' :convertToNum(productkorisnik.Stanje) < 0  }">
+                    <div class="small text-muted">Stanje :</div>
+                    <strong>{{convertToNum(productkorisnik.Stanje) | number : '1.2-2'}} kn</strong>
+                  </div>
+                </td>
+
+
+
+
+
+                <td *ngIf="productsprikazioznaka=='korisnik'" style="text-align:center">
+                  <a>
+                    <popover-content #myPopover7 title="" [closeOnClickOutside]="true">
+                      <b> Info </b>
+                      <p>
+                        <span style="color: #00b3ee">Pregled računa za stan </span>
+                      </p>
+                      <span style="color: #C21F39"></span>
+                      <b>
+                        <i>
+                          <span style="color: #ffc520"> </span>
+                        </i>
+                      </b>
+                      <small> </small>
+                    </popover-content>
+
+                    <button [popover]="myPopover7" [popoverCloseOnMouseOutside]="false" [popoverOnHover]="true" (click)="showInfoStan(productkorisnik)"
+                      class="btn btn-info pointer blueborderbtn1">Info
+                    </button>
+
+                  </a>
+                </td>
+                <td *ngIf="productsprikazioznaka=='majstor'">
+
+                  <a>
+                    <popover-content #myPopover6 title="" [closeOnClickOutside]="true">
+                      <b>Radovi</b>
+                      <p>
+                        <span style="color: #00b3ee"> Pregled izvšenih radova. </span>
+                      </p>
+                      <span style="color: #C21F39"></span>
+                      <b>
+                        <i>
+                          <span style="color: #ffc520"> </span>
+                        </i>
+                      </b>
+                      <small> </small>
+                    </popover-content>
+
+                    <button [popover]="myPopover6" [popoverCloseOnMouseOutside]="false" [popoverOnHover]="true" (click)="showInfoMajstor(productkorisnik)"
+                      class="btn btn-info pointer blueborderbtn1">
+                      Radovi</button>
+                  </a>
+
+                </td>
+
+                <td *ngIf="productsprikazioznaka=='predstavnik'" style="text-align:center">
+
+
+                  <a>
+                    <popover-content #myPopover1 title="" [closeOnClickOutside]="true">
+
+                      <b>Računi </b>
+                      <p>
+                        <span style="color: #00b3ee">Pregled računa za ulaz.</span>
+                      </p>
+                      <span style="color: #C21F39"> </span>
+                      <b>
+                        <i>
+                          <span style="color: #ffc520"> </span>
+                        </i>
+                      </b>
+                      <small> </small>
+
+
+
+                    </popover-content>
+
+                    <button [popover]="myPopover1" [popoverCloseOnMouseOutside]="false" [popoverOnHover]="true" (click)="showInfoPredstavnik(productkorisnik,'1')"
+                      class="btn btn-info pointer blueborderbtn1">
+                      Račun
+                    </button>
+                  </a>
+                  <a>&nbsp;</a>
+                  <a>&nbsp;</a>
+                  <a>
+                    <popover-content #myPopover2 title="" [closeOnClickOutside]="true">
+                      <b> Stanovi </b>
+                      <p>
+                        <span style="color: #00b3ee">Pregled stanova za ulaz.</span>
+                      </p>
+                      <span style="color: #C21F39"> </span>
+                      <b>
+                        <i>
+                          <span style="color: #ffc520"> </span>
+                        </i>
+                      </b>
+                      <small> </small>
+                    </popover-content>
+
+                    <button [popover]="myPopover2" [popoverCloseOnMouseOutside]="false" [popoverOnHover]="true" (click)="showInfoPredstavnik(productkorisnik,'2')"
+                      class="btn btn-info pointer blueborderbtn1">Stanovi
+                    </button>
+
+                  </a>
+                  <a>&nbsp;</a>
+                  <a>&nbsp;</a>
+
+                  <a>
+                    <popover-content #myPopover3 title="" [closeOnClickOutside]="true">
+
+                      <b> Kooperanti </b>
+                      <p>
+                        <span style="color: #00b3ee"> Pregled kooperanata za ulaz. </span>
+                      </p>
+                      <span style="color: #C21F39"> </span>
+                      <b>
+                        <i>
+                          <span style="color: #ffc520"> </span>
+                        </i>
+                      </b>
+                      <small> </small>
+                    </popover-content>
+                    <button [popover]="myPopover3" [popoverCloseOnMouseOutside]="false" [popoverOnHover]="true" (click)="showInfoPredstavnik(productkorisnik,'3')"
+                      class="btn btn-info pointer blueborderbtn1">Koperanti
+                    </button>
+                  </a>
+                  <a>&nbsp;</a>
+                  <a>&nbsp;</a>
+                  <a>
+                    <popover-content #myPopover4 title="" [closeOnClickOutside]="true">
+
+                      <b> Drugi dohodak </b>
+                      <p>
+                        <span style="color: #00b3ee"> Pregled obračuna plaće predstavnika.</span>
+                      </p>
+                      <span style="color: #C21F39"> </span>
+                      <b>
+                        <i>
+                          <span style="color: #ffc520"> </span>
+                        </i>
+                      </b>
+                      <small> </small>
+                    </popover-content>
+                    <button [popover]="myPopover4" [popoverCloseOnMouseOutside]="false" [popoverOnHover]="true" (click)="showInfoPredstavnik(productkorisnik,'4')"
+                      class="btn btn-info pointer blueborderbtn1">D.Dohodak
+                    </button>
+                  </a>
+
+
+                  <a>&nbsp;</a>
+                  <a>&nbsp;</a>
+
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="card-footer" style="text-align:center">
+          <div class="row">
+
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-md-1">
+    </div>
+
+
+
+
+    <div class="col-md-6">
+
+      <div class="card" *ngIf="prikazistavkeinfo">
+        <div class="card-header " style="background: #C7EAF8">
+
+          <div class="row ">
+            <div class="col-md-6">
+              <strong>Računi i uplate</strong>
+            </div>
+            <div class="col-md-6" style="text-align:right">
+              <strong>{{nazivstanje}} {{podacistanje}} kn</strong>
+            </div>
+          </div>
+        </div>
+        <div class="card-body " style="background-color:#E8EBED">
+
+
+
+          <table style="font-size: 10px " class="table table-bordered table-striped table-hover">
+            <thead>
+              <tr>
+
+                <th>Tekst</th>
+                <th>DatumDokumenta</th>
+                <th>DatumDospijeca</th>
+                <th>Dugovanje</th>
+                <th>Plaćeno</th>
+
+                <th style="text-align:center">Print</th>
+                <th style="text-align:center">BarCode</th>
+
+
+
+              </tr>
+            </thead>
+
+            <tbody>
+              <tr *ngFor="let productwkorpregled of productswkorpregled | filter:term | paginate: { itemsPerPage: 18, currentPage: pp, id:'pp' }"
+                (click)="setClickedRow1(productwkorpregled)" [class.active1]="productwkorpregled.Racun == selectedRow1">
+
+                <td>{{productwkorpregled.Tekst}}</td>
+                <td>{{productwkorpregled.DatumDokumenta}}</td>
+                <td>{{productwkorpregled.DatumDospijeca}}</td>
+                <td>{{productwkorpregled.Duguje}}</td>
+                <td>{{productwkorpregled.Potrazuje}}</td>
+
+
+                <td style="text-align:center">
+                  <div>
+                    <popover-content #myPopover title="Print" placement="auto bottom">
+                      <b> </b>
+                      <span style="color: #C21F39"> </span>
+                      <span style="color: #00b3ee">Printanje računa - PDF format</span>
+                      <b>
+                        <i>
+                          <span style="color: #ffc520"></span>
+                        </i>
+                      </b>
+                      <small> </small>
+                    </popover-content>
+
+
+                  </div>
+                  <button [popover]="myPopover" [popoverCloseOnMouseOutside]="false" [popoverOnHover]="true" *ngIf="productwkorpregled.Ispis=='RACN'"
+                    (click)="ispisiPregObrStan(productwkorpregled)" class="bluebtn2">
+
+                    <i class="fa fa-file-pdf-o fa-1x ikona"></i>
+                  </button>
+                </td>
+                <td style="text-align:center">
+                  <div>
+                    <popover-content #myPopovercode title="2D bar code" placement="auto bottom">
+                      <b> </b>
+                      <span style="color: #C21F39"> </span>
+                      <span style="color: #00b3ee">Plaćanje računa - 2D bar code </span>
+                      <b>
+                        <i>
+                          <span style="color: #ffc520"> </span>
+                        </i>
+                      </b>
+                      <small> </small>
+                    </popover-content>
+
+
+                  </div>
+                  <button [popover]="myPopovercode" [popoverCloseOnMouseOutside]="false" [popoverOnHover]="true" *ngIf="productwkorpregled.Ispis=='RACN'"
+                    (click)="ispisiPregObrBarCode(productwkorpregled)" class="bluebtn2">
+
+                    <i class="fa fa-dashcube  fa-1x ikona"></i>
+                  </button>
+                </td>
+
+
+              </tr>
+
+
+            </tbody>
+          </table>
+
+
+
+        </div>
+
+
+
+      </div>
+      <div class="card" *ngIf="prikazistavkepredstavnik">
+        <div class="card-header " style="background: #C7EAF8">
+
+          <strong>{{ textcardheader}}</strong>
+
+        </div>
+        <div class="card-body ">
+
+          <table style="font-size: 10px " class="table table-bordered table-striped table-hover">
+            <thead>
+              <tr>
+
+                <th>Broj</th>
+                <th>Naziv</th>
+                <th>Dobavljac</th>
+                <th>Tekst</th>
+                <th>DatumDokumenta</th>
+                <th>DatumDospijeca</th>
+                <th>Duguje</th>
+                <th>Potrazuje</th>
+
+                <th></th>
+
+
+              </tr>
+            </thead>
+
+            <tbody>
+              <tr *ngFor="let productwkorpregled of productswpredstavnikpregled | filter:term | paginate: { itemsPerPage: 18, currentPage: ppp , id:'ppp'}">
+                <td>{{productwkorpregled.Broj}}</td>
+                <td>{{productwkorpregled.Naziv}}</td>
+                <td>{{productwkorpregled.Dobavljac}}</td>
+                <td>{{productwkorpregled.Tekst}}</td>
+                <td>{{productwkorpregled.DatumDokumenta}}</td>
+                <td>{{productwkorpregled.DatumDospijeca}}</td>
+                <td>{{productwkorpregled.Duguje}}</td>
+                <td>{{productwkorpregled.Potrazuje}}</td>
+
+
+                <td>
+                  <div>
+                    <popover-content #myPopover title="Print" placement="auto bottom">
+                      <b></b>
+                      <span style="color: #C21F39"> </span>
+                      <span style="color: #00b3ee">Printanje računa - PDF format </span>
+                      <b>
+                        <i>
+                          <span style="color: #ffc520"> </span>
+                        </i>
+                      </b>
+                      <small> </small>.
+
+                    </popover-content>
+
+                  </div>
+
+
+
+
+                  <button [popover]="myPopover" [popoverCloseOnMouseOutside]="false" [popoverOnHover]="true" *ngIf="productwkorpregled.Ispis=='RACN'"
+                    (click)="ispisiPregObrStan(productwkorpregled)" class="bluebtn1 ">
+                    <i class="fa fa-file-pdf-o  ikona" style="color:#4682B4;"></i>
+
+                  </button>
+                </td>
+
+
+              </tr>
+
+
+            </tbody>
+          </table>
+        </div>
+
+        <div class="card-footer" style="text-align:center">
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+
+
+  <footer>
+
+    <div class="partrrr">
+
+      <div class="loading" [hidden]="loaderInda"></div>
+    </div>
+
+  </footer>
+
+  <div id="myModal1" style="text-align:center " *ngIf="izmjenaForm">
+    <div class="modal-body">
+      <app-modal class="modal-overlay" [modalTitle]="'Regitriraj se '" [blocking]='false' [modalId]='modalId'>
+        <div class="card">
+          <div class="card-header cardbackcolor" style="font-size: 14px">
+            <strong>LOZINKA</strong> - izmjena
+          </div>
+          <div class="card  py-1 d-md-down-none" style="width:100%">
+            <div class="card-body text-left">
+              <div>
+                <p style="color:#549FBC ;font-size: 16px ;font-weight: bold;">Izmjena Lozinke</p>
+                <p style="font-size: 12px ;">Za upješnu izmjenu lozinke potrebno je u dolje navedena polja upisati sljedeće podatake.</p>
+
+                <li style="font-size: 12px ;margin-left: 15px;">u polje "Lozinka" upisati vašu važeću lozinku.</li>
+                <li style="font-size: 12px ;margin-left: 15px;">u polje "Nova lozinka" upisati novu lozinku koju želite.</li>
+              </div>
+            </div>
+          </div>
+
+          <div class="card-body" style="font-size: 14px;background-color: #E5E6E6">
+            <form action="" method="post" class="form-horizontal">
+
+              <div class="form-group row pror">
+
+                <label class="col-md-4 form-control-label" for="hf-email">Korisničko ime:</label>
+                <div class="col-md-8">
+                  <input class="form-control" type="text" name="newProduct.Korime" style="font-size: 12px" placeholder="Upišite vašu e-mail adresu ... "
+                    disabled [(ngModel)]="newProduct.Korime" />
+                </div>
+              </div>
+              <div class="form-group row pror">
+                <label class="col-md-4 form-control-label" for="hf-email">Lozinka:</label>
+                <div class="col-md-8">
+                  <input class="form-control" type="text" name="newProduct.Lozinkas" style="font-size: 12px" placeholder="Upišite važeću lozinku ... "
+                    [(ngModel)]="newProduct.Lozinkas" />
+                </div>
+              </div>
+              <div class="form-group row pror">
+                <label class="col-md-4 form-control-label" for="hf-email">Nova lozinka:</label>
+                <div class="col-md-8">
+                  <input class="form-control" type="text" name="newProduct.Lozinkan" style="font-size: 12px" placeholder="Upišite novu lozinku ... "
+                    [(ngModel)]="newProduct.Lozinkan" />
+                </div>
+              </div>
+
+            </form>
+          </div>
+          <div class="card-footer" *ngIf="!izmjenaPotvrdi">
+            <button (click)="saveIzmjena(newProduct)" type="button" class="btn btn-sm btn-primary" style="background-color:#549FBC;color:#fff;">
+              <i class="fa fa-dot-circle-o"></i>Izmjeni</button>
+            <button (click)="cancelNewForm()" type="reset" class="btn btn-sm btn-danger">
+              <i class="fa fa-ban"></i>Prekini</button>
+          </div>
+          <div class="card-footer" *ngIf="!izmjenaNEOK && izmjenaOK">
+
+            <p style="color:#549FBC ;font-size: 14px ;">Lozinka uspješno izmjenjena</p>
+            <button (click)="cancelNewForm()" type="reset" class="btn btn-sm btn-primary" style="background-color:#549FBC;color:#fff;">
+              <i class="fa fa-ban"></i>OK</button>
+          </div>
+
+          <div class="card-footer" *ngIf="izmjenaNEOK">
+            <p style="color:#D34343 ;font-size: 14px ;">Lozinka nije izmjenjena - pokušajte ponovo</p>
+          </div>
+
+        </div>
+      </app-modal>
+    </div>
+  </div>
+
+  <div id="myModal2" style="text-align:center " *ngIf="barcodeForm">
+    <div class="modal-body">
+      <app-modal class="modal-overlay" [modalTitle]="'Regitriraj se '" [blocking]='false' [modalId]='modalId'>
+        <div class="card">
+          <div class="card-header cardbackcolor" style="font-size: 14px">
+            <strong>2D Barcode</strong> - plaćanje
+          </div>
+          <div class="card" style="width:100%">
+            <div class="card-body text-center">
+
+              <a style="color:#549FBC ;font-size: 16px ;font-weight: bold;">plaćanje mobilnim bankarstvom</a>
+
+            </div>
+          </div>
+          <div class="card-body" style="font-size: 14px;background-color: #E5E6E6">
+            <form action="" method="post" class="form-horizontal" style="text-align:left">
+              <div class="form-group row pror">
+                <label class="col-md-4 form-control-label" for="hf-email">Text :</label>
+                <div class="col-md-8"> {{barcodetextslog.Tekst}} </div>
+              </div>
+              <div class="form-group row pror">
+                <label class="col-md-4 form-control-label" for="hf-email">Dat. Dokumenta :</label>
+                <div class="col-md-8"> {{barcodetextslog.DatumDokumenta}} </div>
+              </div>
+              <div class="form-group row pror">
+                <label class="col-md-4 form-control-label" for="hf-email">Dat. Dospijeca :</label>
+                <div class="col-md-8"> {{barcodetextslog.DatumDospijeca}} </div>
+              </div>
+              <div class="form-group row pror">
+                <label class="col-md-4 form-control-label" for="hf-email">Za platiti :</label>
+                <div class="col-md-8"> {{barcodetextslog.Duguje}} </div>
+              </div>
+              <p></p>
+              <p></p>
+              <div class="form-group row pror">
+                <img src={{barcodeimg}} />
+              </div>
+              <p></p>
+            </form>
+          </div>
+          <div class="card-footer" *ngIf="!izmjenaPotvrdi">
+            <button (click)="cancelNewForm()" type="button" class="btn btn-sm btn-primary" style="background-color:#549FBC;color:#fff;">
+              <i class="fa fa-dot-circle-o"></i> Izlaz</button>
+          </div>
+        </div>
+      </app-modal>
+    </div>
+  </div>
+
+
+</div>

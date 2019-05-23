@@ -1,0 +1,132 @@
+.main { 
+    // background: url("/assets/img/login.jpeg") no-repeat center center fixed !important; 
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+  }
+  
+  .pozicija1{
+  //    top: 150;
+  // left: 0;
+  // bottom: 20;
+  // right: 60;
+   margin-left: 125px;
+  }
+  .pozicija2{
+  //    top: 150;
+  // left: 0;
+   bottom: 0;
+  // right: 60;
+  //  margin-left: 125px;
+  }
+  .myfont1{
+  font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+  }
+
+  .sasvimdole {
+    background-color: orange;
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    height: 100px;
+    width: 100%;
+    overflow: hidden;
+}
+.cardbackcolor{
+  background: #AADCEF; 
+ 
+}
+
+
+
+article {
+  margin-left: 970px;
+  border-left: 1px solid gray;
+  padding: 1em;
+  overflow: hidden;
+}
+.header {
+  display: inline-block;
+  float: left;
+}
+
+
+.modal {
+}
+
+.vertical-alignment-helper {
+  display:table;
+  height: 100%;
+  width: 100%;
+}
+.vertical-align-center {
+  /* To center vertically */
+  display: table-cell;
+  vertical-align: middle;
+}
+.modal-content {
+  /* Bootstrap sets the size of the modal in the modal-dialog class, we need to inherit it */
+  width:inherit;
+  height:inherit;
+  /* To center horizontally */
+  margin: 0 auto;
+}
+
+
+.modal-background {
+      /* modal background fixed across whole screen */
+      position: fixed;
+      top: 0;
+      right: 0;
+      bottom: 0;
+      left: 0;
+      /* semi-transparent black  */
+      background-color: #000;
+      opacity: 0.75;
+       
+      /* z-index must be below .modal and above everything else  */
+      z-index: 900;
+  }
+.modal {
+      /* modal container fixed across whole screen */
+      position: fixed;
+      top: 0;
+      right: 0;
+      bottom: 0;
+      left: 0;
+      /* z-index must be higher than .modal-background */
+      z-index: 1000;
+       
+      /* enables scrolling for tall modals */
+      overflow: auto;
+}
+      .modal-body {
+          padding: 20px;
+          background: #fff;
+          /* margin exposes part of the modal background */
+          margin: 40px;
+      }
+body.modal-open {
+  /* body overflow is hidden to hide main scrollbar when modal window is open */
+  overflow: hidden;
+}
+.modal-overlay {
+background-color: rgba(0, 0, 0, .4);
+bottom: 0;
+left: 0;
+position: fixed;
+right: 0;
+top: 0;
+z-index: 1000;
+}
+.wgtmsr{
+width:150px;   
+}
+.prorw {
+  topmargin-bottom: 3px ;
+  margin-top: -5px ;
+}
+
+.three  {cursor:url(assets/img/Turquoise1.cur), auto; }
+.pointer {cursor: pointer;}

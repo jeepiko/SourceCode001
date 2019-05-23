@@ -1,0 +1,119 @@
+.modal-overlay {
+  background-color: rgba(0, 0, 0, .4);
+  bottom: 0;
+  left: 0;
+  position: fixed;
+  right: 0;
+  top: 0;
+  z-index: 1000;
+}
+
+.closed {
+  .modal{
+    top: -50%;
+  }
+  .modal-overlay{
+    display: none;
+  }
+}
+
+.modalaa {
+  box-shadow: 0 12px 15px 0 rgba(0, 0, 0, .22), 0 17px 20px 0 rgba(0, 0, 0, .12);
+
+  background-color: white;
+  left: calc(50% - 200px);
+  max-height: calc(100% - 10em);
+  overflow-y: auto;
+  position: fixed;
+  top: 6em;
+  width: 500px;
+  z-index: 1100;
+  transition: all .5s ease;
+
+  .titleblue {
+    background-color: #4682B4	;
+    text-align: center;
+    color: white;
+    line-height: 40px;
+
+    .right-align {
+      position: absolute;
+      right: 5px;
+      &, i{
+        line-height: 40px;
+      }
+
+      &:hover{
+        cursor: pointer;
+        transform: scale(1.1);
+      }
+    }
+  }
+  .titlered {
+    background-color: red	;
+    text-align: center;
+    color: white;
+    line-height: 40px;
+
+    .right-align {
+      position: absolute;
+      right: 5px;
+      &, i{
+        line-height: 40px;
+      }
+
+      &:hover{
+        cursor: pointer;
+        transform: scale(1.1);
+      }
+    }
+  }
+.titlegreen {
+    background-color: green	;
+    text-align: center;
+    color: white;
+    line-height: 40px;
+
+    .right-align {
+      position: absolute;
+      right: 5px;
+      &, i{
+        line-height: 40px;
+      }
+
+      &:hover{
+        cursor: pointer;
+        transform: scale(1.1);
+      }
+    }
+    
+  }
+
+
+.titlegrey {
+    background-color:#EBEBEB	;
+    text-align: center;
+    color: Black;
+    line-height: 40px;
+
+    .right-align {
+      position: absolute;
+      right: 5px;
+      &, i{
+        line-height: 40px;
+      }
+
+      &:hover{
+        cursor: pointer;
+        transform: scale(1.1);
+      }
+    }
+    
+  }
+
+
+
+  .body{
+    padding: 1.2em;
+  }
+}
